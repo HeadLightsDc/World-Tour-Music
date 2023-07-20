@@ -11,7 +11,7 @@ ctk.set_default_color_theme("dark-blue")  # temas: blue (default), dark-blue, gr
 button_search_icon = ctk.CTkImage(Image.open("resources\\icons\\search_logo.png"), size=(30, 30))
 program_logo_icon = ctk.CTkImage(Image.open("resources\\icons\\program_logo.png"), size=(323, 58))
 bg_login_png = ctk.CTkImage(Image.open("resources\\background\\background_login.png"), size=(1920, 1080))
-
+bg_login_png = ctk.CTkImage(Image.open("resources\\png\\background_login.png"), size=(1920, 1080))
 # window login
 class Login(ctk.CTk):
         def __init__(self):
