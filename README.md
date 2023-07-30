@@ -1,11 +1,23 @@
-<h1 align="center"> Final Proyect </h1>
+# World Tour Music
 
-Proyecto final de programación de curso en Python, en el se busca implementar los conocimientos adquiridos.
+Es una aplicación de escritorio que permita a los usuarios descubrir eventos
+musicales, planificar rutas y compartir su experiencia de manera eficiente y
+agradable.
 
-<h3> Lenguaje </h3>
-<p>Python = 3.8.3</p>
+## Pre-requisitos 📋
+```
+python 3.8.3
 
-<h3> Librerias </h3>
-<p>CustomTkinter = 5.2.0</p>
+customtkinter 5.2.0
+
+pillow 10.0.0
+
+tkintermapview 1.29
+```
+
+## Instalación 🛠️
+Clona el repositorio
+
+## Funcionalidades
 
         

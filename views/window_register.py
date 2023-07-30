@@ -1,5 +1,5 @@
 from config import *
-from data.data_config import User
+from data_config import User
 
 # background image
 bg_register = ctk.CTkImage(Image.open("resources\\background\\register_bg.png"), size=(1920, 1080))
@@ -18,12 +18,13 @@ class Register(Secundary_window):
             self.username_entry = Entry_theme_1(self)
             self.password_entry = Entry_theme_1(self)
             
-            self.register_button = Button(self,
+            self.error_label_text = Label_text(self,
+                                               bg_color="#84DCCF",
+                                               size=12, 
+                                               text_color="red")
+            
+            self.register_button = Button_theme_1(self,
                                           width=200,
-                                          border_color="black",
-                                          bg_color="black",
-                                          fg_color="black",
-                                          hover_color="#FEDF01",
                                           text = "Registrarse",
                                           command = lambda: self.register(),
                                           )
@@ -35,30 +36,40 @@ class Register(Secundary_window):
             self.username_entry.place(x=810, y=675)
             self.password_entry.place(x=810, y=761)
             
-            self.register_button.place(x=860, y = 840)
-
+            self.register_button.place(x=860, y=840)
 
         def register(self):
+            
+            """Este método permite al usuario registrarse
+            
+            Se hace una entrada de datos por medio de los widgets "Entry" posteriormente son validos y notifica al
+            usuario si hubo un error con los datos introducidos. Si todo esta perfecto se añade la información a la
+            base de datos (json)."""
             
             name = self.name_entry.get()
             lastname = self.lastname_entry.get()
             email = self.email_entry.get()
             user = self.username_entry.get()
-            password = sha256(self.password_entry.get().encode('utf-8')).hexdigest()
-
-            # Crear una instancia de User con los datos ingresados
+            password = self.password_entry.get()
+            
+            error_message = self.check_data(name, lastname, email, user, password)
+            if error_message:
+                self.notification_error(error_message)
+                return
+            
+            password = sha256(password.encode('utf-8')).hexdigest()
+            # Creación de un objetos User con los datos ingresados como atributos
             account = User(name, lastname, email, user, password)
 
             with open("data/account.json", "r") as file:
                 data = json.load(file)
                 
-            # Obtener la lista actual de usuarios del archivo JSON o inicializarla si no existe
             user_list = data.get("users", [])
             
             if not data:
                 data = {}
             
-            # Convertir la instancia de User en un diccionario y agregarlo a la lista
+            # Convierte el objeto User en un diccionario y se agrega a una lista
             user_list.append({
                 "name": account.name,
                 "lastname": account.lastname,
@@ -76,6 +87,38 @@ class Register(Secundary_window):
             
             print("Registrado con exito")
             
-            self.destroy()
+            return self.destroy()
             
+        def check_data(self, name, lastname, email, user, password):
             
+            "Valida los datos ingresados en el registro si todo esta bien se continua con el registro, sino se notifica el error cometido"
+            
+            min_chars = 8
+            valid_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+            
+            if len(name) == 0 or len(lastname) == 0 or len(email) == 0 or len(user) == 0 or len(password) == 0:
+                error = "Para poder registrase complete los campos requeridos."
+                return error
+            
+            if not (re.fullmatch(valid_email, email)):
+                error = "El correo electronico ingresado no es valido."
+                return error
+            
+            if len(user) < min_chars and len(password) < min_chars:
+                error = "El usuario y contraseña deben contener como mínimo 8 caracteres."
+                return error
+            
+            if len(user) < min_chars:
+                error = "El usuario debe contener como mínimo 8 caracteres."
+                return error
+            
+            if len(password) < min_chars:
+                error = "La contraseña debe contener como mínimo 8 caracteres."
+                return error 
+            
+        def notification_error(self, message):
+            
+            """Toma como argumento el error y muestra posteriormente en pantalla el error"""
+            
+            self.error_label_text.configure(text = message)
+            self.error_label_text.place(x=800, y=810)

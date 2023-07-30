@@ -1,5 +1,5 @@
-from views.window_menu import*
-from views.window_login import Login
+from window_menu import*
+from window_login import Login
 
 if __name__ == "__main__":
     

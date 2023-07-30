@@ -20,20 +20,23 @@ class Menu(ctk.CTk):
         # ========== Creating widgets ==========   
         self.search_entry = Entry_theme_1(self,
                                         width=600,
-                                        height=45,
-                                        size=20
+                                        placeholder_text="Busqueda",
+                                        size=16,
                                         )
         
         self.filtered_frame = ctk.CTkFrame(self,
-                                           width=311,
-                                           height=792,
-                                           fg_color= "#FEDF01"
+                                           corner_radius=0,
+                                           width=432,
+                                           height=694,
+                                           fg_color= "#F2F1EC"
                                            )
         
         self.eventmark_scrollable_frame = ctk.CTkScrollableFrame(self,
-                                                                 width=1377,
-                                                                 height=780,
-                                                                 fg_color= "#FEDF01",
+                                                                 corner_radius=0,
+                                                                 border_width=0,
+                                                                 width=1260,
+                                                                 height=693,
+                                                                 fg_color= "#F2F1EC",
                                                                  )
         
         # ========== frame filter widgets ==========  
@@ -64,9 +67,9 @@ class Menu(ctk.CTk):
                                                          text = "Hs: 19:00 a 00:00")
         
         # ========== Placing widgets ==========  
-        self.search_entry.place(x=790, y=228)
-        self.filtered_frame.place(x=103, y=288)
-        self.eventmark_scrollable_frame.place(x=417, y=288)
+        self.search_entry.place(x=815, y=333.5)
+        self.filtered_frame.place(x=103.5, y=382.4)
+        self.eventmark_scrollable_frame.place(x=540, y=382.4)
         
         # ========== Frame filter ==========
         self.ubication_label_text.place(x=10, y=10)  
