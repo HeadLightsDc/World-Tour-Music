@@ -28,7 +28,8 @@ class Login(Secundary_window):
             self.register_button = Button_theme_1(self,
                                                   width=250,
                                                   text = "Registrarse",
-                                                  command = lambda: self.open_register_window(),)
+                                                  command = lambda: self.open_register_window(),
+                                                  )
             
             self.error_label_text = Label_text(self,
                                                bg_color="black",
@@ -72,12 +73,14 @@ class Login(Secundary_window):
             for user_data in user_list:
                 if user_data["user_id"] == user and user_data["password"] == password:
                     print("Inicio de Sesión ¡Exitoso!")
-                    self.destroy()
-                    self.parent.deiconify()
-                    return
+                    if user == "Administrador":
+                        self.parent.admin_mode()
+                        print("El usuario que inicio sesión es el administrador")
                 else:
                     self.error_label_text.configure(text = error_incorrect)
                     self.error()
+                    
+                return self.destroy(), self.parent.deiconify()
             
         def error(self):
             self.error_label_text.place(x=1180, y=480)

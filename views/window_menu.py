@@ -1,4 +1,5 @@
 from config import *
+from window_about_event import About_event
 
 # background image
 menu_bg = ctk.CTkImage(Image.open("resources\\background\\menu_bg.png"), size=(1920, 1080))
@@ -6,6 +7,9 @@ menu_bg = ctk.CTkImage(Image.open("resources\\background\\menu_bg.png"), size=(1
 class Menu(ctk.CTk):
     def __init__(self):
         super().__init__()
+        
+        self.admin = False
+        print(self.admin)
             
         # ========== background config ==========      
         self.title("Tour World Music")
@@ -17,7 +21,7 @@ class Menu(ctk.CTk):
         # ========== placing background ==========
         self.bg_panel.pack(fill="both", expand="yes")
         
-        # ========== Creating widgets ==========   
+        # ========== Creating widgets ==========
         self.search_entry = Entry_theme_1(self,
                                         width=600,
                                         placeholder_text="Busqueda",
@@ -81,3 +85,25 @@ class Menu(ctk.CTk):
         self.filter_morning_checkbox.place(x=50, y=215)
         self.filter_afternoon_checkbox.place(x=50, y=250)
         self.filter_evening_checkbox.place(x=50, y=285)
+    
+    def admin_mode(self):
+                self.add_event_buttom = Button_theme_1(self,
+                                                       width = 145,
+                                                       text = "Añadir",
+                                                       command = lambda: self.open_add_event_window(),
+                                                       )
+                
+                self.delete_event_buttom = Button_theme_1(self,
+                                                          width = 145,
+                                                          text = "Eliminar",
+                                                          )
+                
+                self.add_event_buttom.place(x=1490, y=333.5)
+                self.delete_event_buttom.place(x=1660, y=333.5)
+                
+    def open_add_event_window(self):
+        print("Ir a ventana de añadir evento")
+        window_add_event = About_event(self)
+        self.withdraw()
+        window_add_event.wait_window()
+        self.deiconify()

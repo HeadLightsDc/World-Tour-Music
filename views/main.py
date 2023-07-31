@@ -5,7 +5,7 @@ if __name__ == "__main__":
     
     # ========== Main Window ==========
     root = Menu()
-    root.iconify()
+    root.withdraw()
     print("Menu Minimizado")
     
     # ========== Secundary Window - Login ==========
