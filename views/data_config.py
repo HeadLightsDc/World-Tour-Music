@@ -6,7 +6,18 @@ class User:
         self.user_id = user_id
         self.password = password
         self.event_history = []
-        
+          
+class Event:
+    def __init__(self, venue, name, description, address, latitude, longitude, shedulate, price):
+        self.venue = venue
+        self.name = name
+        self.description = description
+        self.address = address
+        self.latitude = latitude
+        self.longitude = longitude
+        self.shedulate = shedulate
+        self.price = price
+
 class Review:
     def __init__(self, review_id, event_id, user_id, rating, comment, mood):
         self.review_id = review_id
@@ -15,17 +26,6 @@ class Review:
         self.rating = rating
         self.comment = comment
         self.mood = mood
-    
-class Event:
-    def __init__(self, event_id, name, artist, genre, id_ubication, time_start, description, imagen):
-        self.event_id = event_id
-        self.name = name
-        self.artist = artist
-        self.genre = genre
-        self.id_ubication = id_ubication
-        self.time_start = time_start
-        self.description = description
-        self.image = imagen
         
 class Ubication:
     def __init__(self, ubication_id, name, address, coordinates): #Investigar funcionamiento list

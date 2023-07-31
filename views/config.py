@@ -98,5 +98,23 @@ class Label_text(ctk.CTkLabel):
             font=("Open Sans", size, "bold"),
             text_color=text_color,
             )
+        
+class TextBox(ctk.CTkTextbox):
+    """ Configuración de Widget TextBox"""
+    
+    def __init__(self, *args, size=32, width, height, text_color="white",**kwargs):
+        super().__init__(*args, **kwargs)
+        self.configure(
+            border_color = "white",
+            fg_color = "black",
+            border_width=2,
+            corner_radius=0,
+            width=width,
+            height=height,
+            font=("Open Sans", size, "bold"),
+            text_color=text_color,
+            )
+    
+    
                                               
                                                

@@ -1,5 +1,5 @@
 from config import *
-from window_about_event import About_event
+from window_event import Create_event
 
 # background image
 menu_bg = ctk.CTkImage(Image.open("resources\\background\\menu_bg.png"), size=(1920, 1080))
@@ -90,7 +90,7 @@ class Menu(ctk.CTk):
                 self.add_event_buttom = Button_theme_1(self,
                                                        width = 145,
                                                        text = "Añadir",
-                                                       command = lambda: self.open_add_event_window(),
+                                                       command = lambda: self.open_create_event_window(),
                                                        )
                 
                 self.delete_event_buttom = Button_theme_1(self,
@@ -101,9 +101,9 @@ class Menu(ctk.CTk):
                 self.add_event_buttom.place(x=1490, y=333.5)
                 self.delete_event_buttom.place(x=1660, y=333.5)
                 
-    def open_add_event_window(self):
+    def open_create_event_window(self):
         print("Ir a ventana de añadir evento")
-        window_add_event = About_event(self)
+        window_create_event = Create_event(self)
         self.withdraw()
-        window_add_event.wait_window()
+        window_create_event.wait_window()
         self.deiconify()
