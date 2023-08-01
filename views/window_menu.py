@@ -124,17 +124,20 @@ class Menu(ctk.CTk):
             events = data["events"]
             for row, (event_id, event_data) in enumerate(events.items(), start=1):
                 event_name = event_data["name"]
-                label = Label_text(self.eventmark_scrollable_frame, text=event_name)
-                label.grid(row=row, column=0, columnspan=2, sticky="w", pady=5)
+                
+                label = Label_text(self.eventmark_scrollable_frame, 
+                                   width=1035,
+                                   anchor="w",
+                                   text=event_name)
+                
+                label.grid(row=row, column=0, padx=20, pady=10)
 
                 event_button = Button_theme_1(self.eventmark_scrollable_frame,
-                                              width=250,
+                                              width=175,
                                               text="Saber más",
                                               command=lambda event_id=event_id: self.show_event_details(event_id)
                                               )
-                event_button.grid(row=row, column=3, padx=10, sticky="w")
-                
-            
+                event_button.grid(row=row, column=1, pady=10)
                 
     def show_event_details(self, event_id):
         print(f"Saber más sobre el evento con ID {event_id}")
