@@ -85,6 +85,9 @@ class Menu(ctk.CTk):
         self.filter_morning_checkbox.place(x=50, y=215)
         self.filter_afternoon_checkbox.place(x=50, y=250)
         self.filter_evening_checkbox.place(x=50, y=285)
+        
+        # ========== Inicialización ==========
+        self.show_event_widgets(0)  
     
     def admin_mode(self):
                 self.add_event_buttom = Button_theme_1(self,
@@ -106,4 +109,32 @@ class Menu(ctk.CTk):
         window_create_event = Create_event(self)
         self.withdraw()
         window_create_event.wait_window()
+        self.show_event_widgets(0)
         self.deiconify()
+        
+    def show_event_widgets(self, update):
+        if update == 1:
+            for widget in self.eventmark_scrollable_frame.winfo_children():
+                widget.destroy()
+
+        with open("data/event.json", "r") as file:
+            data = json.load(file)
+
+        if "events" in data:
+            events = data["events"]
+            for row, (event_id, event_data) in enumerate(events.items(), start=1):
+                event_name = event_data["name"]
+                label = Label_text(self.eventmark_scrollable_frame, text=event_name)
+                label.grid(row=row, column=0, columnspan=2, sticky="w", pady=5)
+
+                event_button = Button_theme_1(self.eventmark_scrollable_frame,
+                                              width=250,
+                                              text="Saber más",
+                                              command=lambda event_id=event_id: self.show_event_details(event_id)
+                                              )
+                event_button.grid(row=row, column=3, padx=10, sticky="w")
+                
+            
+                
+    def show_event_details(self, event_id):
+        print(f"Saber más sobre el evento con ID {event_id}")

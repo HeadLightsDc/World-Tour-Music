@@ -97,4 +97,3 @@ class Login(Secundary_window):
             window_register.wait_window()
             self.deiconify()
         
-        
