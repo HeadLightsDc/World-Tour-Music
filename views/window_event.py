@@ -41,14 +41,14 @@ class Create_event(Secundary_window):
                                              placeholder_text="Longitud...",
                                              )
         
-        self.schedule_entry = Entry_theme_1(self,
-                                            width=390,
-                                            placeholder_text="22:00hs a 01:00hs...",
-                                            )
+        self.date_entry = Entry_theme_1(self,
+                                        width=390,
+                                        placeholder_text="DD/MM/AA",
+                                        )
         
-        self.price_entry = Entry_theme_1(self, 
+        self.schedule_entry = Entry_theme_1(self, 
                                          width=390,
-                                         placeholder_text="$9999.99...",
+                                         placeholder_text="gs 20:00 a hs 00:00...",
                                          )
         
         self.error_label_text = Label_text(self,
@@ -80,8 +80,8 @@ class Create_event(Secundary_window):
         self.address_entry.place(x=120, y=445)
         self.latitude_entry.place(x=120, y=495)
         self.longitude_entry.place(x=325, y=495)
-        self.schedule_entry.place(x=120, y=620)
-        self.price_entry.place(x=120, y=800)
+        self.date_entry.place(x=120, y=620)
+        self.schedule_entry.place(x=120, y=800)
         self.add_event_button.place(x=170, y=945)
         self.back_window_button.place(x=170, y=1010)
         self.map_widget.place(x=533, y=383)
@@ -97,14 +97,14 @@ class Create_event(Secundary_window):
         address = self.address_entry.get()
         latitude = self.latitude_entry.get()
         longitude = self.longitude_entry.get()
+        date = self.date_entry.get()
         schedule = self.schedule_entry.get()
-        price = self.price_entry.get()
         
-        if len(venue) == 0 or len(name) == 0 or len(description) == 0 or len(address) == 0 or len(latitude) == 0 or len(longitude) == 0 or len(schedule) == 0 or len(price) == 0:
+        if len(venue) == 0 or len(name) == 0 or len(description) == 0 or len(address) == 0 or len(latitude) == 0 or len(longitude) == 0 or len(date) == 0 or len(schedule) == 0:
             self.error_label_text.place(x=185, y=915)
             return
         
-        new_event = Event(venue, name, description, address, latitude, longitude, schedule, price)
+        new_event = Event(venue, name, description, address, latitude, longitude, date, schedule)
 
         self.last_event_id += 1
         new_event_id = self.last_event_id

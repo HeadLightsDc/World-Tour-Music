@@ -76,11 +76,12 @@ class Login(Secundary_window):
                     if user == "Administrador":
                         self.parent.admin_mode()
                         print("El usuario que inicio sesión es el administrador")
+                    return self.destroy(), self.parent.deiconify()
+                
                 else:
                     self.error_label_text.configure(text = error_incorrect)
                     self.error()
-                    
-                return self.destroy(), self.parent.deiconify()
+
             
         def error(self):
             self.error_label_text.place(x=1180, y=480)
