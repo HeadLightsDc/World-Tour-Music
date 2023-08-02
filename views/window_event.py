@@ -4,6 +4,84 @@ import tkintermapview
 
 about_event_bg = ctk.CTkImage(Image.open("resources\\background\\about_event.png"), size=(1920, 1080))
 
+class About_event(Secundary_window):
+    def __init__(self, parent, event_id):
+        super().__init__(parent)
+        
+        self.event_id = event_id
+        self.bg_panel.configure(self, image = about_event_bg)
+        
+        # ========== Creating widgets ==========  
+        self.venue_label = Label_text(self, size=40, fg_color="#F2F1EC", text_color="#BC1823")
+        
+        self.name_event_label = Label_text(self, size=35, fg_color="#F2F1EC")
+        
+        self.description_textbox = TextBox(self,          #Ver que hacer aqui...
+                                           width=1680,
+                                           height=150)
+        
+        self.address_label = Label_text(self, size=20, fg_color="#F2F1EC")
+        
+        self.date_label = Label_text(self, size=20, fg_color="#F2F1EC")
+        
+        self.schedule_label = Label_text(self, size=20, fg_color="#F2F1EC")
+        
+        self.add_event_button = Button_theme_1(self,
+                                               text="Añadir evento",
+                                               command=lambda: self.add_event(), ###Modificar
+                                               )
+        
+        self.back_window_button = Button_theme_1(self, 
+                                                 text="Volver atras",
+                                                 command=lambda: self.back_window(),
+                                                 )
+        # ========== Map view Widget ==========
+        self.map_widget = tkintermapview.TkinterMapView(self, 
+                                                        width=1283, 
+                                                        height=693, 
+                                                        )
+        
+        # ========== Placing widgets ==========
+        self.venue_label.place(x=120, y=83)
+        self.name_event_label.place(x=770, y=148)
+        
+        
+        self.description_textbox.place(x=120, y=210)
+        self.address_label.place(x=120, y=445)
+        self.date_label.place(x=120, y=620)
+        self.schedule_label.place(x=120, y=800)
+        self.add_event_button.place(x=170, y=945)
+        self.back_window_button.place(x=170, y=1010)
+        self.map_widget.place(x=533, y=383)
+        
+        # ========== Inicialización ==========
+        self.event_detail_upload(event_id)
+        
+    def back_window(self):
+        print("Cerrando ventana de añadir evento, volviendo a menu")
+        self.destroy()
+        
+    def event_detail_upload(self, event_id):
+        with open("data/event.json", "r") as file:
+            data = json.load(file)
+        
+        evento = data["events"].get(str(event_id))
+        
+        venue = evento.get("venue")
+        name = evento.get("name")
+        description = evento.get("description")
+        address = evento.get("address")
+        latitude = evento.get("latitude")
+        longitude = evento.get("longitude")
+        date = evento.get("date")
+        schedule = evento.get("schedule")
+        
+        self.venue_label.configure(text=venue)
+        self.name_event_label.configure(text=name)
+        self.address_label.configure(text=address)
+        self.date_label.configure(text=date)
+        self.schedule_label.configure(text=schedule)     
+        
 class Create_event(Secundary_window):
     def __init__(self, parent):
         super().__init__(parent)

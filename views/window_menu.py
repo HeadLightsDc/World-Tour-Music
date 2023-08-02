@@ -1,5 +1,5 @@
 from config import *
-from window_event import Create_event
+from window_event import Create_event, About_event
 
 # background image
 menu_bg = ctk.CTkImage(Image.open("resources\\background\\menu_bg.png"), size=(1920, 1080))
@@ -127,7 +127,6 @@ class Menu(ctk.CTk):
                 
                 label = Label_text(self.eventmark_scrollable_frame, 
                                    width=1035,
-                                   anchor="w",
                                    text=event_name)
                 
                 label.grid(row=row, column=0, padx=20, pady=10)
@@ -135,9 +134,13 @@ class Menu(ctk.CTk):
                 event_button = Button_theme_1(self.eventmark_scrollable_frame,
                                               width=175,
                                               text="Saber más",
-                                              command=lambda event_id=event_id: self.show_event_details(event_id)
+                                              command=lambda event_id=event_id: self.open_event_details_window(event_id)
                                               )
                 event_button.grid(row=row, column=1, pady=10)
                 
-    def show_event_details(self, event_id):
+    def open_event_details_window(self, event_id):
         print(f"Saber más sobre el evento con ID {event_id}")
+        window_about_event = About_event(self, event_id)
+        self.withdraw()
+        window_about_event.wait_window()
+        self.deiconify()

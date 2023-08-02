@@ -35,7 +35,7 @@ class Entry(ctk.CTkEntry):
             corner_radius = corner_radius,
             border_width = border_width,
             placeholder_text_color = "#dcdcdc",
-            font = ("Open Sans", size, "bold"),
+            font = ("Open Sans Extra Bold", size, "bold"),
             )
         
 class Entry_theme_1(Entry):
@@ -63,7 +63,7 @@ class Button(ctk.CTkButton):
             height=height, 
             corner_radius=corner_radius,
             border_width=border_width,
-            font=("Open Sans", size, "bold"),
+            font=("Open Sans Extra Bold", size, "bold"),
             ) 
         
 class Button_theme_1(Button):
@@ -83,7 +83,7 @@ class Checkbox_filter(ctk.CTkCheckBox):
         super().__init__(*args, **kwargs)
         self.configure(
             width=100,
-            font=("Open Sans", size, "normal"),
+            font=("Open Sans Extra Bold", size, "bold"),
             border_color="black",
             text_color="black",
             )       
@@ -95,7 +95,8 @@ class Label_text(ctk.CTkLabel):
     def __init__(self, *args, size=32, text_color="black",**kwargs):
         super().__init__(*args, **kwargs)
         self.configure(
-            font=("Open Sans", size, "bold"),
+            font=("Open Sans Extra Bold", size, "bold"),
+            anchor = "w",
             text_color=text_color,
             )
         
@@ -111,7 +112,7 @@ class TextBox(ctk.CTkTextbox):
             corner_radius=0,
             width=width,
             height=height,
-            font=("Open Sans", size, "bold"),
+            font=("Open Sans Extra Bold", size, "bold"),
             text_color=text_color,
             )
     
