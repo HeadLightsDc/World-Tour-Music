@@ -95,9 +95,18 @@ class Register(Secundary_window):
             
             min_chars = 8
             valid_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+            valid_name_or_lastname = r'^[A-Z][a-z]*$'
             
             if len(name) == 0 or len(lastname) == 0 or len(email) == 0 or len(user) == 0 or len(password) == 0:
                 error = "Para poder registrase complete los campos requeridos."
+                return error
+            
+            if not (re.fullmatch(valid_name_or_lastname, name)):
+                error = "No se permiten números y caracteres especiales en el nombre. Debe empezar con una letra en mayuscula."
+                return error
+            
+            if not (re.fullmatch(valid_name_or_lastname, lastname)):
+                error = "No se permiten números y caracteres especiales en el apellido. Debe empezar con una letra en mayuscula"
                 return error
             
             if not (re.fullmatch(valid_email, email)):

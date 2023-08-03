@@ -92,11 +92,11 @@ class Label_text(ctk.CTkLabel):
     
     """ Configuración de Widget Label de texto """
     
-    def __init__(self, *args, size=32, text_color="black",**kwargs):
+    def __init__(self, *args, size=32, text_color="black", anchor="w",**kwargs):
         super().__init__(*args, **kwargs)
         self.configure(
             font=("Open Sans Extra Bold", size, "bold"),
-            anchor = "w",
+            anchor = anchor,
             text_color=text_color,
             )
         
