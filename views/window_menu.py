@@ -74,8 +74,8 @@ class Menu(ctk.CTk):
                 
         self.delete_event_buttom = Button_theme_1(self, width = 145, text = "Eliminar")
                 
-        self.add_event_buttom.place(x=850, y=30)
-        self.delete_event_buttom.place(x=850, y=70)
+        self.add_event_buttom.place(x=830, y=50)
+        self.delete_event_buttom.place(x=830, y=90)
                 
     def open_create_event_window(self):
         
