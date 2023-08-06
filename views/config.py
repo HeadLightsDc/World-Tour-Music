@@ -84,10 +84,10 @@ class Checkbox_filter(ctk.CTkCheckBox):
         super().__init__(*args, **kwargs)
         self.configure(
             width=100,
-            font=("Open Sans Extra Bold", size, "bold"),
+            bg_color="#f2f1ec",
             border_color="black",
-            text_color="black",
-            )       
+            font=("Open Sans Extra Bold", size, "bold"),
+            text_color="black")       
         
 class Label_text(ctk.CTkLabel):
     

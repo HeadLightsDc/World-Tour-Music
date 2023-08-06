@@ -17,102 +17,82 @@ class Menu(ctk.CTk):
         self.bg_panel = ctk.CTkLabel(self, text=None,
                                      image = menu_bg,
                                      )
-        
-        # ========== placing background ==========
+    
         self.bg_panel.pack(fill="both", expand="yes")
         
-        # ========== Creating widgets ==========
-        self.search_entry = Entry_theme_1(self,
-                                        width=600,
-                                        placeholder_text="Busqueda",
-                                        size=16,
-                                        )
-        
-        self.filtered_frame = ctk.CTkFrame(self,
-                                           corner_radius=0,
-                                           width=432,
-                                           height=694,
-                                           fg_color= "#F2F1EC"
-                                           )
-        
+        # ========== search widgets ==========
         self.eventmark_scrollable_frame = ctk.CTkScrollableFrame(self,
                                                                  corner_radius=0,
                                                                  border_width=0,
                                                                  width=1260,
-                                                                 height=693,
-                                                                 fg_color= "#F2F1EC",
-                                                                 )
+                                                                 height=895,
+                                                                 fg_color= "#F2F1EC")
         
-        # ========== frame filter widgets ==========  
+        self.search_entry = Entry_theme_1(self,
+                                        width=600,
+                                        placeholder_text="Busqueda",
+                                        size=16)
         
-        self.ubication_label_text = Label_text(self.filtered_frame,
-                                               text= "Ubicación")
+        self.eventmark_scrollable_frame.place(x=540, y=180)   
+        self.search_entry.place(x=720, y=135)
         
-        self.filter_salta_checkbox = Checkbox_filter(self.filtered_frame,
-                                                           text = "Salta")
+        # ========== filter widgets ==========   
+        self.filter1_checkbox = Checkbox_filter(self, text = "Teatro Provincial de Salta")
         
-        self.filter_bs_as_checkbox = Checkbox_filter(self.filtered_frame,
-                                                           text = "Buenos Aires")
+        self.filter2_checkbox = Checkbox_filter(self, text = "Centro de Convenciones")
         
-        self.filter_santa_fe_checkbox = Checkbox_filter(self.filtered_frame,
-                                                           text = "Santa fe")
+        self.filter3_checkbox = Checkbox_filter(self, text = "Casa de la Cultura")
         
+        self.filter4_checkbox = Checkbox_filter(self, text = "Estadio Delmi")
         
-        self.schedule_label_text = Label_text(self.filtered_frame,
-                                              text="Horario")
+        self.filter_morning_checkbox = Checkbox_filter(self, text = "Mañana")
         
-        self.filter_morning_checkbox = Checkbox_filter(self.filtered_frame,
-                                                           text = "Hs: 7:00 a 12:00")
+        self.filter_afternoon_checkbox = Checkbox_filter(self, text = "Tarde")
         
-        self.filter_afternoon_checkbox = Checkbox_filter(self.filtered_frame,
-                                                           text = "Hs: 13:00 a 18:00")
+        self.filter_evening_checkbox = Checkbox_filter(self, text = "Noche")
+            
+        self.filter_morning_checkbox.place(x=150, y=330)
+        self.filter_afternoon_checkbox.place(x=150, y=365)
+        self.filter_evening_checkbox.place(x=150, y=400)
         
-        self.filter_evening_checkbox = Checkbox_filter(self.filtered_frame,
-                                                         text = "Hs: 19:00 a 00:00")
-        
-        # ========== Placing widgets ==========  
-        self.search_entry.place(x=815, y=333.5)
-        self.filtered_frame.place(x=103.5, y=382.4)
-        self.eventmark_scrollable_frame.place(x=540, y=382.4)
-        
-        # ========== Frame filter ==========
-        self.ubication_label_text.place(x=10, y=10)  
-        self.filter_salta_checkbox.place(x=50, y=60)
-        self.filter_bs_as_checkbox.place(x=50, y=95)
-        self.filter_santa_fe_checkbox.place(x=50, y=130)
-        
-        self.schedule_label_text.place(x=10, y=165)
-        self.filter_morning_checkbox.place(x=50, y=215)
-        self.filter_afternoon_checkbox.place(x=50, y=250)
-        self.filter_evening_checkbox.place(x=50, y=285)
+        self.filter1_checkbox.place(x=150, y=490)
+        self.filter2_checkbox.place(x=150, y=525)
+        self.filter3_checkbox.place(x=150, y=560)
+        self.filter4_checkbox.place(x=150, y=595)
         
         # ========== Inicialización ==========
         self.show_event_widgets(0)  
     
     def admin_mode(self):
-                self.add_event_buttom = Button_theme_1(self,
-                                                       width = 145,
-                                                       text = "Añadir",
-                                                       command = lambda: self.open_create_event_window(),
-                                                       )
+        
+        """Este metodo se ejecuta unicamente en el login si el usuario es el Administrador crea dos botones, añadir eventos y eliminar eventos"""
+        
+        self.add_event_buttom = Button_theme_1(self,
+                                               width = 145,
+                                               text = "Añadir",
+                                               command = lambda: self.open_create_event_window())
                 
-                self.delete_event_buttom = Button_theme_1(self,
-                                                          width = 145,
-                                                          text = "Eliminar",
-                                                          )
+        self.delete_event_buttom = Button_theme_1(self, width = 145, text = "Eliminar")
                 
-                self.add_event_buttom.place(x=1490, y=333.5)
-                self.delete_event_buttom.place(x=1660, y=333.5)
+        self.add_event_buttom.place(x=850, y=30)
+        self.delete_event_buttom.place(x=850, y=70)
                 
     def open_create_event_window(self):
+        
+        """Al hacer click en el boton(añadir evento) exclusivo de administrador se abre una ventana para añadir eventos"""
+        
         print("Ir a ventana de añadir evento")
         window_create_event = Create_event(self)
         self.withdraw()
         window_create_event.wait_window()
-        self.show_event_widgets(0)
+        self.show_event_widgets(0) ###Checkear que pasa si le doy el parametro 1
         self.deiconify()
         
-    def show_event_widgets(self, update):
+    def show_event_widgets(self, update = 0):
+        
+        """Este metodo, se inicializa automaticamente al crear un objeto con esta clase, el parametro update sirve para actualizar los eventos
+        unicamente en el modo administrador """
+        
         if update == 1:
             for widget in self.eventmark_scrollable_frame.winfo_children():
                 widget.destroy()
@@ -139,6 +119,9 @@ class Menu(ctk.CTk):
                 event_button.grid(row=row, column=1, pady=10)
                 
     def open_event_details_window(self, event_id):
+        
+        """Mustra mas información sobre el evento seleccionado por el usuario"""
+        
         print(f"Saber más sobre el evento con ID {event_id}")
         window_about_event = About_event(self, event_id)
         self.withdraw()
