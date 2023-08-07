@@ -4,11 +4,11 @@ import tkintermapview
 musical_route_bg = ctk.CTkImage(Image.open("resources\\background\\musical_route_bg.png"), size=(1920, 1080))
 
 class Musical_route(Secundary_window):
-    def __init__(self, parent):
+    def __init__(self, parent, user_id):
         super().__init__(parent)
         
         self.bg_panel.configure(self, image = musical_route_bg)
-        
+        self.user_id = user_id
         # ========== map view widget========== 
         self.map_frame = ctk.CTkFrame(self, width=1283, height=882)
         self.map_widget = tkintermapview.TkinterMapView(self.map_frame, width=1283, height=882)
@@ -24,6 +24,9 @@ class Musical_route(Secundary_window):
                                                  command=lambda: self.back_window())
         
         self.back_window_button.place(x=170, y=1010)
+        
+        #Test
+        print(user_id)
         
     def back_window(self):
         

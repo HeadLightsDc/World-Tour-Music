@@ -5,7 +5,7 @@ import tkintermapview
 about_event_bg = ctk.CTkImage(Image.open("resources\\background\\about_event_bg.png"), size=(1920, 1080))
 
 class About_event(Secundary_window):
-    def __init__(self, parent, event_id, select_ubication_callback=None):
+    def __init__(self, parent, event_id, user_id, select_ubication_callback=None):
         super().__init__(parent)
         
         self.bg_panel.configure(self, image = about_event_bg)
@@ -13,6 +13,7 @@ class About_event(Secundary_window):
         # ========== variable ========== 
         self.event_id = event_id
         self.select_ubication_callback = select_ubication_callback
+        self.user_id = user_id
         
         # ========== title widgets ==========  
         self.venue_label = Label_text(self, width=747.5, size=40, fg_color="#2B4257", text_color="#369694", anchor="center")
@@ -56,8 +57,8 @@ class About_event(Secundary_window):
         
         # ========== Buttom widgets ==========
         self.add_event_button = Button_theme_1(self,
-                                               text="Añadir evento",
-                                               command=lambda: self.add_event()) ###Modificar
+                                               text="Añadir a tu Ruta Musical",
+                                               command=lambda: self.add_event_to_musical_route()) ###Modificar
         
         self.back_window_button = Button_theme_1(self, 
                                                  text="Volver atras",
@@ -105,9 +106,24 @@ class About_event(Secundary_window):
         self.map_widget.set_position(latitude, longitude)
         self.add_marker_to_map(latitude, longitude, venue)
         
+    def add_event_to_musical_route(self):
+        with open("data/account.json", "r") as file:
+            data = json.load(file)
+            
+        user = data["account"].get(str(self.user_id))
+        events = user.get("event_history")
+        events.append(str(self.event_id))
+        
+        with open("data/account.json", "w") as file:
+            json.dump(data, file,  indent=4)
+            
+        return self.back_window()
+            
+        
     def add_marker_to_map(self, latitud, longitud, texto, imagen=None):
         
         """Permite añadir una marca al mapa"""
+        
         return self.map_widget.set_marker(latitud, longitud, text=texto, image=imagen, command=self.select_ubication_callback)     
         
 class Create_event(Secundary_window):

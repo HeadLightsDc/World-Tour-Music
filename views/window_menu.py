@@ -9,8 +9,7 @@ class Menu(ctk.CTk):
     def __init__(self):
         super().__init__()
         
-        self.admin = False
-        print(self.admin)
+        self.logged_in_user_id = None
             
         # ========== background config ==========      
         self.title("Tour World Music")
@@ -135,7 +134,7 @@ class Menu(ctk.CTk):
         """Mustra mas información sobre el evento seleccionado por el usuario"""
         
         print(f"Saber más sobre el evento con ID {event_id}")
-        window_about_event = About_event(self, event_id)
+        window_about_event = About_event(self, event_id, self.logged_in_user_id)
         self.withdraw()
         window_about_event.wait_window()
         self.deiconify()
@@ -144,7 +143,10 @@ class Menu(ctk.CTk):
         
         """Mustra la ruta musical del usuario"""
         
-        window_musical_route = Musical_route(self)
+        window_musical_route = Musical_route(self, self.logged_in_user_id)
         self.withdraw()
         window_musical_route.wait_window()
         self.deiconify()
+        
+    def set_user_id(self, user_id):
+        self.logged_in_user_id = user_id

@@ -73,6 +73,7 @@ class Login(Secundary_window):
             for user_id, user_info in user_data.items():
                 if user_info["nickname"] == user and user_info["password"] == password:
                     print("Inicio de Sesión ¡Exitoso!")
+                    self.parent.set_user_id(user_id)
                     if user == "Administrador":
                         self.parent.admin_mode()
                         print("El usuario que inicio sesión es el administrador")
