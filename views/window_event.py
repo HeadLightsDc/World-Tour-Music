@@ -2,7 +2,7 @@ from config import *
 from data_config import Event
 import tkintermapview
 
-about_event_bg = ctk.CTkImage(Image.open("resources\\background\\about_event.png"), size=(1920, 1080))
+about_event_bg = ctk.CTkImage(Image.open("resources\\background\\about_event_bg.png"), size=(1920, 1080))
 
 class About_event(Secundary_window):
     def __init__(self, parent, event_id, select_ubication_callback=None):

@@ -1,5 +1,6 @@
 from config import *
 from window_event import Create_event, About_event
+from window_musical_route import Musical_route
 
 # background image
 menu_bg = ctk.CTkImage(Image.open("resources\\background\\menu_bg.png"), size=(1920, 1080))
@@ -59,6 +60,17 @@ class Menu(ctk.CTk):
         self.filter2_checkbox.place(x=150, y=525)
         self.filter3_checkbox.place(x=150, y=560)
         self.filter4_checkbox.place(x=150, y=595)
+        
+        # ========== button widgets ==========
+        self.musical_route_button = Button(self,
+                                           width = 160,
+                                           fg_color = "#BC1823",
+                                           hover_color = "#369694",
+                                           border_color = "black",
+                                           text = "Tu Ruta Musical",
+                                           command = lambda: self.open_musical_route_window())
+        
+        self.musical_route_button.place(x=1480, y=135)
         
         # ========== Inicialización ==========
         self.show_event_widgets(0)  
@@ -126,4 +138,13 @@ class Menu(ctk.CTk):
         window_about_event = About_event(self, event_id)
         self.withdraw()
         window_about_event.wait_window()
+        self.deiconify()
+        
+    def open_musical_route_window(self):
+        
+        """Mustra la ruta musical del usuario"""
+        
+        window_musical_route = Musical_route(self)
+        self.withdraw()
+        window_musical_route.wait_window()
         self.deiconify()
