@@ -122,11 +122,11 @@ class Create_event(Secundary_window):
         
         # ========== map view widget ==========
         self.map_frame = ctk.CTkFrame(self, width=1283, height=693)
-        self.map_frame.place(x=533, y=383)      
         self.map_widget = tkintermapview.TkinterMapView(self.map_frame, width=1283, height=693)
         self.map_widget.set_position(-24.7891876, -65.4103297) #Controla la ubicación por defecto del mapa
         self.map_widget.set_zoom(16) #Distancia de visualización del mapa
         
+        self.map_frame.place(x=533, y=383)      
         self.map_widget.place(x=0, y=0)
         
         # ========== place, name and description widgets ==========  

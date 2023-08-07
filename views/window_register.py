@@ -53,41 +53,45 @@ class Register(Secundary_window):
             password = self.password_entry.get()
             
             error_message = self.check_data(name, lastname, email, user, password)
+            
             if error_message:
                 self.notification_error(error_message)
                 return
             
             password = sha256(password.encode('utf-8')).hexdigest()
             # Creación de un objetos User con los datos ingresados como atributos
-            account = User(name, lastname, email, user, password)
-
+            new_account = User(name, lastname, email, user, password)
+            
             with open("data/account.json", "r") as file:
                 data = json.load(file)
                 
-            user_list = data.get("users", [])
+            user_data = data.get("account", {})
             
-            if not data:
-                data = {}
+            for existing_user in user_data.values():
+                if existing_user["nickname"] == user:
+                    error_message = "El nombre de usuario ya está registrado. Por favor, elija otro nombre de usuario."
+                    self.notification_error(error_message)
+                    return
+
+            new_account_id = self.get_last_id() + 1
             
-            # Convierte el objeto User en un diccionario y se agrega a una lista
-            user_list.append({
-                "name": account.name,
-                "lastname": account.lastname,
-                "email": account.email,
-                "user_id": account.user_id,
-                "password": account.password,
-                "event_history": account.event_history
-                })
-            
-            # Actualizar el archivo JSON con la nueva lista de usuarios
-            data["users"] = user_list
-            
+            data["account"][str(new_account_id)] = new_account.__dict__
+                      
             with open("data/account.json", "w") as file:
-                json.dump(data, file)
+                json.dump(data, file, indent=4)
             
             print("Registrado con exito")
             
-            return self.destroy()
+            return self.back_window()
+            
+        def get_last_id(self):
+            with open("data/account.json", "r") as file:
+                data = json.load(file)
+                if data and "account" in data:
+                    accounts = data["account"]
+                    if accounts:
+                        return max(int(account_id) for account_id in accounts.keys())
+            return 0
             
         def check_data(self, name, lastname, email, user, password):
             
@@ -131,3 +135,10 @@ class Register(Secundary_window):
             
             self.error_label_text.configure(text = message)
             self.error_label_text.place(x=800, y=810)
+            
+        def back_window(self):
+            
+            """ Se autodestruye el objeto, cuando se destruye muestra login"""
+            
+            print("Cerrando ventana de registro, volviendo a login")
+            self.destroy()

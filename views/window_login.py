@@ -68,16 +68,15 @@ class Login(Secundary_window):
             with open("data/account.json", "r") as file:
                 data = json.load(file)
             
-            user_list = data.get("users", [])
+            user_data = data.get("account", {})
             
-            for user_data in user_list:
-                if user_data["user_id"] == user and user_data["password"] == password:
+            for user_id, user_info in user_data.items():
+                if user_info["nickname"] == user and user_info["password"] == password:
                     print("Inicio de Sesión ¡Exitoso!")
                     if user == "Administrador":
                         self.parent.admin_mode()
                         print("El usuario que inicio sesión es el administrador")
                     return self.destroy(), self.parent.deiconify()
-                
                 else:
                     self.error_label_text.configure(text = error_incorrect)
                     self.error()
