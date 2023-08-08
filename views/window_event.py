@@ -58,7 +58,7 @@ class About_event(Secundary_window):
         # ========== Buttom widgets ==========
         self.add_event_button = Button_theme_1(self,
                                                text="Añadir a tu Ruta Musical",
-                                               command=lambda: self.add_event_to_musical_route()) ###Modificar
+                                               command=lambda: self.add_event_to_musical_route())
         
         self.back_window_button = Button_theme_1(self, 
                                                  text="Volver atras",

@@ -25,8 +25,27 @@ class Musical_route(Secundary_window):
         
         self.back_window_button.place(x=170, y=1010)
         
-        #Test
-        print(user_id)
+        # ========== inicializacion ==========
+        self.show_mark_events()
+        
+    def show_mark_events(self):
+        with open("data/account.json", "r") as file:
+            data = json.load(file)
+           
+        user = data["account"].get(str(self.user_id))
+        event_ids = user.get("event_history")
+        
+        with open("data/event.json", "r") as file:
+            event_data = json.load(file)
+        
+        for event_id in event_ids:
+            event = event_data["events"].get(event_id)
+            if event:
+                venue = event.get("venue")
+                latitude = event.get("latitude")
+                longitude = event.get("longitude")
+                self.map_widget.set_marker(latitude, longitude, venue)
+
         
     def back_window(self):
         
