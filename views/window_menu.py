@@ -96,7 +96,7 @@ class Menu(ctk.CTk):
         window_create_event = Create_event(self)
         self.withdraw()
         window_create_event.wait_window()
-        self.show_event_widgets(update = 1) ###Checkear que pasa si le doy el parametro 1
+        self.show_event_widgets(update = 1)
         self.deiconify()
         
     def show_event_widgets(self, update = 0):

@@ -19,6 +19,10 @@ class Musical_route(Secundary_window):
         self.map_frame.place(x=533, y=194)
         self.map_widget.place(x=0, y=0)
         
+        self.map_option_menu = ctk.CTkOptionMenu(self, values=["OpenStreetMap", "Google normal", "Google satellite"],
+                                                 command=self.change_map) 
+        
+        self.map_option_menu.place(x=550, y=1030) 
         # ========== frame event  ========== 
         self.eventmark_scrollable_frame = ctk.CTkScrollableFrame(self,
                                                                  corner_radius=0,
@@ -72,7 +76,8 @@ class Musical_route(Secundary_window):
                                    width=310,
                                    size=15,
                                    text=name,
-                                   command = lambda latitude=latitude, longitude=longitude: self.map_widget.set_position(latitude, longitude))
+                                   command = lambda latitude=latitude, longitude=longitude: (self.map_widget.set_position(latitude, longitude), self.map_widget.set_zoom(16)))
+
 
                 set_map_button.grid(row=row, column=0, pady=10)
 
@@ -94,7 +99,20 @@ class Musical_route(Secundary_window):
         window_about_event = About_event(self, event_id, self.user_id, route_musical=True)
         self.withdraw()
         window_about_event.wait_window()
+        self.map_widget.delete_all_marker() # elimina todas las marcas del mapa
+        self.load_events(1) # eLimina los eventos cargandos, para volverlos a cargar
         self.deiconify()
+        
+    def change_map(self, new_map: str):
+        
+        """Cambia el tipo de mapa"""
+        
+        if new_map == "OpenStreetMap":
+            self.map_widget.set_tile_server("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png")
+        elif new_map == "Google normal":
+            self.map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)
+        elif new_map == "Google satellite":
+            self.map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)
         
     def back_window(self):
         
