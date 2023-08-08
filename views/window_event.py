@@ -5,7 +5,7 @@ import tkintermapview
 about_event_bg = ctk.CTkImage(Image.open("resources\\background\\about_event_bg.png"), size=(1920, 1080))
 
 class About_event(Secundary_window):
-    def __init__(self, parent, event_id, user_id, select_ubication_callback=None):
+    def __init__(self, parent, event_id, user_id, route_musical=False, select_ubication_callback=None):
         super().__init__(parent)
         
         self.bg_panel.configure(self, image = about_event_bg)
@@ -14,6 +14,7 @@ class About_event(Secundary_window):
         self.event_id = event_id
         self.select_ubication_callback = select_ubication_callback
         self.user_id = user_id
+        self.route_musical = route_musical
         
         # ========== title widgets ==========  
         self.venue_label = Label_text(self, width=747.5, size=40, fg_color="#2B4257", text_color="#369694", anchor="center")
@@ -56,15 +57,22 @@ class About_event(Secundary_window):
         
         
         # ========== Buttom widgets ==========
-        self.add_event_button = Button_theme_1(self,
-                                               text="Añadir a tu Ruta Musical",
-                                               command=lambda: self.add_event_to_musical_route())
+        if self.route_musical:
+            self.add_event_button = Button_theme_1(self,
+                                                   text="Eliminar de tu Ruta Musical",
+                                                   command=lambda: self.remove_event_from_musical_route())
+        else:
+            self.add_event_button = Button_theme_1(self,
+                                                   text="Añadir a tu Ruta Musical",
+                                                   command=lambda: self.add_event_to_musical_route())
+            
+        self.add_event_button.place(x=170, y=945)
+
         
         self.back_window_button = Button_theme_1(self, 
                                                  text="Volver atras",
                                                  command=lambda: self.back_window())
         
-        self.add_event_button.place(x=170, y=945)
         self.back_window_button.place(x=170, y=1010)
         
         # ========== Inicialización ==========
@@ -116,6 +124,20 @@ class About_event(Secundary_window):
         
         with open("data/account.json", "w") as file:
             json.dump(data, file,  indent=4)
+            
+        return self.back_window()
+    
+    def remove_event_from_musical_route(self):
+        with open("data/account.json", "r") as file:
+            data = json.load(file)
+        
+        user = data["account"].get(str(self.user_id))
+        events = user.get("event_history")
+    
+        events.remove(str(self.event_id))
+        
+        with open("data/account.json", "w") as file:
+            json.dump(data, file, indent=4)
             
         return self.back_window()
             
