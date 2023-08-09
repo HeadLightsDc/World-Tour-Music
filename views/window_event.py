@@ -176,6 +176,10 @@ class Create_event(Secundary_window):
         self.map_widget.set_position(-24.7891876, -65.4103297) #Controla la ubicación por defecto del mapa
         self.map_widget.set_zoom(16) #Distancia de visualización del mapa
         
+        self.map_widget.add_right_click_menu_command(label="Agragar marca y cargar coordenadas:",
+                                                     command=self.add_marker_event,
+                                                     pass_coords=True)
+        
         self.map_frame.place(x=533, y=383)      
         self.map_widget.place(x=0, y=0)
         
@@ -245,7 +249,7 @@ class Create_event(Secundary_window):
                                            width=390,
                                            placeholder_text="Dirección...")
         
-        self.latitude_entry = Entry_theme_1(self, 
+        self.latitude_entry = Entry_theme_1(self,
                                             width=185,
                                             placeholder_text="Latitud...")
         
@@ -370,3 +374,12 @@ class Create_event(Secundary_window):
             return 0 <= minute <= 59 and len(input_value) <= 2
         except ValueError:
             return False
+        
+    def add_marker_event(self, coords):
+        print("Agragar marca y cargar coordenadas:", coords)
+        self.map_widget.delete_all_marker()
+        self.latitude_entry.delete(0, 'end')
+        self.longitude_entry.delete(0, 'end')
+        self.map_widget.set_marker(coords[0], coords[1], text="Nuevo Evento")
+        self.latitude_entry.insert(0, str(coords[0]))
+        self.longitude_entry.insert(0, str(coords[1]))
