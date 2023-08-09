@@ -8,10 +8,11 @@ class User:
         self.event_history = []
           
 class Event:
-    def __init__(self, venue, name, description, address, latitude, longitude, start_time, end_time):
+    def __init__(self, venue, name, description, artist, address, latitude, longitude, start_time, end_time):
         self.venue = venue
         self.name = name
         self.description = description
+        self.artist = artist
         self.address = address
         self.latitude = latitude
         self.longitude = longitude

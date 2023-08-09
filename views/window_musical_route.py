@@ -76,7 +76,7 @@ class Musical_route(Secundary_window):
                                    width=310,
                                    size=15,
                                    text=name,
-                                   command = lambda latitude=latitude, longitude=longitude: (self.map_widget.set_position(latitude, longitude), self.map_widget.set_zoom(16)))
+                                   command = lambda latitude=latitude, longitude=longitude: (self.map_widget.set_position(latitude, longitude), self.map_widget.set_zoom(18)))
 
 
                 set_map_button.grid(row=row, column=0, pady=10)

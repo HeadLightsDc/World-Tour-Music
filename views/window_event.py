@@ -35,6 +35,16 @@ class About_event(Secundary_window):
         
         self.description_label_text.place(x=120, y=210)
         
+        self.artist_label_text = Label_text(self,         
+                                           width=390,
+                                           height=100,
+                                           size=20, 
+                                           fg_color="#F2F1EC",
+                                           anchor="nw",
+                                           justify="left")
+        
+        self.artist_label_text.place(x=120, y=440)
+        
         # ========== Location event widgets (map view)========== 
         self.address_label = Label_text(self, size=20, fg_color="#F2F1EC")
         
@@ -97,6 +107,7 @@ class About_event(Secundary_window):
         venue = evento.get("venue")
         name = evento.get("name")
         description = evento.get("description")
+        artist = evento.get("artist")
         address = evento.get("address")
         latitude = evento.get("latitude")
         longitude = evento.get("longitude")
@@ -106,6 +117,7 @@ class About_event(Secundary_window):
         self.venue_label.configure(text=venue)
         self.name_event_label.configure(text=name)
         self.description_label_text.configure(text=description)
+        self.artist_label_text.configure(text=artist)
         self.address_label.configure(text=address)
         self.start_time_label.configure(text=start_time)
         self.end_time_label.configure(text=end_time)
@@ -167,22 +179,28 @@ class Create_event(Secundary_window):
         self.map_frame.place(x=533, y=383)      
         self.map_widget.place(x=0, y=0)
         
-        # ========== place, name and description widgets ==========  
+        # ========== place, name, description, artist widgets ==========  
         self.venue_entry = Entry_theme_1(self, 
-                                         width=715,
+                                         width=755,
                                          placeholder_text="Estadio... Teatro... Centro de...")
         
-        self.name_event_entry = Entry_theme_1(self, width=755,
+        self.name_event_entry = Entry_theme_1(self, width=715,
                                               placeholder_text="Nombre del evento...")
         
         self.description_textbox = TextBox(self,
                                            width=1680,
                                            height=150,
                                            size=20)
+        
+        self.artist_textbox = TextBox(self,
+                                      width=390,
+                                      height=100,
+                                      size=20)
        
-        self.venue_entry.place(x=120, y=150)
-        self.name_event_entry.place(x=865, y=150)
+        self.venue_entry.place(x=865, y=150)
+        self.name_event_entry.place(x=120, y=150)
         self.description_textbox.place(x=120, y=210)
+        self.artist_textbox.place(x=120, y=440)
         
         # ========== start Date/time widgets ==========  
         self.start_date_entry = DateEntry(self,
@@ -273,6 +291,7 @@ class Create_event(Secundary_window):
         venue = self.venue_entry.get()
         name = self.name_event_entry.get()
         description = self.description_textbox.get("1.0", "end")
+        artist = self.artist_textbox.get("1.0", "end")
         address = self.address_entry.get()
         latitude = float(self.latitude_entry.get()) #SI ESTA VACIO CAUSA UN ERROR EVITARLO EN LA INTEGRACION DE CLICK EN EL MAPA
         longitude = float(self.longitude_entry.get()) #SI ESTA VACIO CAUSA UN ERROR EVITARLO EN LA INTEGRACION DE CLICK EN EL MAPA
@@ -288,14 +307,14 @@ class Create_event(Secundary_window):
         end_date_str = end_date.isoformat() #retorna un string que representa la hora en formato ISO 8601
 
         
-        if len(venue) == 0 or len(name) == 0 or len(description) == 0 or len(address) == 0 or latitude == None or longitude == 0 or len(start_hour) == 0 or len(start_minute) == 0 or len(end_hour) == 0 or len(end_minute) == 0:
+        if len(venue) == 0 or len(name) == 0 or len(description) == 0 or len(address) == 0 or len(artist) == 0 or latitude == None or longitude == 0 or len(start_hour) == 0 or len(start_minute) == 0 or len(end_hour) == 0 or len(end_minute) == 0:
             self.error_label_text.place(x=185, y=915)                                   #None no actua como lo esperado...
             return
         
         start_time = f"{start_date_str} a las {start_hour}:{start_minute}"                               
         end_time = f"{end_date_str} a las {end_hour}:{end_minute}"
         
-        new_event = Event(venue, name, description, address, latitude, longitude, start_time, end_time)
+        new_event = Event(venue, name, description, artist, address, latitude, longitude, start_time, end_time)
 
         self.last_event_id += 1
         new_event_id = self.last_event_id
