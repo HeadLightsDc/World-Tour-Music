@@ -1,0 +1,26 @@
+{
+    "events": {
+        "1": {
+            "venue": "Estadio Martearena",
+            "name": "Festival de Rock Salte\u00f1o",
+            "description": "Prep\u00e1rate para una explosi\u00f3n de energ\u00eda y pasi\u00f3n musical en el Festival de Rock Salte\u00f1o! Este evento anual re\u00fane a algunas de las mejores bandas de rock de la regi\u00f3n para\ncelebrar la vibrante escena musical de Salta. Desde cl\u00e1sicos del rock hasta nuevos talentos emergentes, el festival ofrece una experiencia \u00fanica para los amantes de la m\u00fasica.\nBaila toda la noche al ritmo de los poderosos acordes de bandas como Los Gauchos del Norte, La Salte\u00f1ita Rockera y Los Andes del Rock. \u00a1No te pierdas este incre\u00edble festival\nque promete emociones fuertes y momentos inolvidables!\n",
+            "artist": "Los Gauchos del Norte\nLa Salte\u00f1ita Rockera\nLos Andes del Rock\n",
+            "address": "Av. Entre R\u00edos 1200",
+            "latitude": -24.8208439,
+            "longitude": -65.4190916,
+            "start_time": "2024-03-24 a las 20:00",
+            "end_time": "2024-04-25 a las 23:00"
+        },
+        "2": {
+            "venue": "Centro Cultural Am\u00e9rica",
+            "name": "Noche de Tango",
+            "description": "\u00a1Sum\u00e9rgete en el apasionante mundo del tango argentino en la Noche de Tango del Centro Cultural Am\u00e9rica!\nEste evento especial ofrece una velada inolvidable llena de m\u00fasica y baile en el coraz\u00f3n de Salta. Disfruta de emocionantes presentaciones en vivo de la Orquesta T\u00edpica\n!Ven y \u00fanete a esta celebraci\u00f3n del arte y la cultura del tango argentino!\n\n",
+            "artist": "Orquesta T\u00edpica Salta\nBailarines de Tango\n",
+            "address": "Mitre 23",
+            "latitude": -24.788285,
+            "longitude": -65.412739,
+            "start_time": "2024-03-22 a las 21:00",
+            "end_time": "2024-03-22 a las 23:00"
+        }
+    }
+}

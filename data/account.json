@@ -1,0 +1,25 @@
+{
+    "account": {
+        "1": {
+            "name": "admin",
+            "lastname": "admin",
+            "email": "admin@example.com",
+            "nickname": "Administrador",
+            "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+            "event_history": [
+                "1"
+            ]
+        },
+        "2": {
+            "name": "Benjamin",
+            "lastname": "Romero",
+            "email": "benjamin@gmail.com",
+            "nickname": "usuario1",
+            "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+            "event_history": [
+                "1",
+                "2"
+            ]
+        }
+    }
+}
