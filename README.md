@@ -8,13 +8,19 @@ Creando asi tu ruta musical.
 
 
 ## Screenshots 📷
-
-![Iniciar Sesión](resource/screenshots/screenshot1.png)
-![Registro](resource/screenshots/screenshot2.png)
-![Menu](resource/screenshots/screenshot3.png)
-![Acerca del evento](resource/screenshots/screenshot4.png)
-![Ruta Musical](resource/screenshots/screenshot5.png)
-![Añadir Eventos](resource/screenshots/screenshot6.png)
+### Pantalla de Inicio de Sesión
+![Iniciar Sesión](resources/screenshots/screenshot1.png)
+### Pantalla de Registro
+![Registro](resources/screenshots/screenshot2.png)
+### Pantalla de Menu
+![Menu](resources/screenshots/screenshot3.png)
+Si inicia sesión como admin, se añaden 2 botones: Añadir Evento / Eliminar Evento
+### Pantalla de Acerca del Evento
+![Acerca del evento](resources/screenshots/screenshot4.png)
+### Pantalla de Ruta Musical
+![Ruta Musical](resources/screenshots/screenshot5.png)
+### Pantalla de Añadir Evento (Exclusivo Modo Admin)
+![Añadir Eventos](resources/screenshots/screenshot6.png)
 
 
 ## Instalación de Dependencias 📦
